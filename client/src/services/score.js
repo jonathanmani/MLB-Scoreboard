@@ -1,5 +1,3 @@
-const axios = require('axios').default;
-
 const getLiveScores = async () => {
   const url =
     'https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/2022-SEP-15?key=ba9964121aa440ca824e5a17b2aaa8bb';

@@ -2,19 +2,25 @@ import React from 'react';
 import './GameCard.css';
 
 const GameCard = ({ game, logos }) => {
-  // console.log('logos', logos)
-  // const teamLogo = (teamName) => {
-  //   const obj = logos.filter(logo => logo.key === teamName)[0]
-  //   return obj.url;
-  // }
-  // const homeTeamLogo = teamLogo(game.HomeTeam);
-  // const awayTeamLogo = teamLogo(game.AwayTeam);
-  // console.log(homeTeamLogo, awayTeamLogo)
+  const homeObj = logos.filter((e) => e.key === game.HomeTeam)[0];
+  const homeLogo = homeObj.logo;
+  const awayObj = logos.filter((e) => e.key === game.AwayTeam)[0];
+  const awayLogo = awayObj.logo;
+
+  if (!(awayLogo && homeLogo)) return <div></div>;
+
   return (
     <div className='gameCard'>
-      <img href='' alt='teamLogo' />
+      <img
+        src={homeLogo}
+        alt=''
+      />
       <div>{game.HomeTeam}</div>
       <div>{game.HomeTeamRuns}</div>
+      <img
+        src={awayLogo}
+        alt=''
+      />
       <div>{game.AwayTeam}</div>
       <div>{game.AwayTeamRuns}</div>
     </div>
