@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import GameCard from './components/GameCard';
 import { getLiveScores } from './services/score';
+import { getLogos } from './services/logos'
 
 function App() {
   const [games, setGames] = useState([]);
+  const [logos, setLogos] = useState([]);
 
   useEffect(() => {
     updateGames();
+    getTeamLogos()
   }, []);
 
   const updateGames = async () => {
@@ -15,13 +18,19 @@ function App() {
     setGames(scores);
   };
 
+  const getTeamLogos = async () => {
+    const logos = await getLogos();
+    setLogos(logos);
+  };
+
   return (
     <div className='App'>
       <h1>MLB Live Stats</h1>
-      {games.map((game) => {
+      {games.map((game, index) => {
+        console.log('logos', logos)
         return (
-          <div>
-            <GameCard game={game} />
+          <div key={index}>
+            <GameCard game={game} logos={logos}/>
           </div>
         );
       })}
