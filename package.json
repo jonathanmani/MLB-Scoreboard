@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/jonathanmani/MLB-Scoreboard/issues"
   },
-  "homepage": "https://github.com/jonathanmani/MLB-Scoreboard#readme"
+  "homepage": "https://github.com/jonathanmani/MLB-Scoreboard#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2"
+  }
 }
