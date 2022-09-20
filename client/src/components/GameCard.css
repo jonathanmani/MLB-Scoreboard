@@ -1,3 +1,11 @@
 .gameCard {
   border: 1px solid black;
+  margin: 1rem;
+  padding: 0.5rem;
+  /* display: flex; */
+}
+
+.gameCard img {
+  max-width: 100px;
+  max-height: 100px;
 }

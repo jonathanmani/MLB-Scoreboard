@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import GameCard from './components/GameCard';
 import { getLiveScores } from './services/score';
-import { getLogos } from './services/logos'
+import { getLogos } from './services/logos';
 
 function App() {
   const [games, setGames] = useState([]);
@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     updateGames();
-    getTeamLogos()
+    getTeamLogos();
   }, []);
 
   const updateGames = async () => {
@@ -23,17 +23,23 @@ function App() {
     setLogos(logos);
   };
 
+  if (!logos.length) return <div></div>;
+
   return (
     <div className='App'>
       <h1>MLB Live Stats</h1>
-      {games.map((game, index) => {
-        console.log('logos', logos)
-        return (
-          <div key={index}>
-            <GameCard game={game} logos={logos}/>
-          </div>
-        );
-      })}
+      <div className='games-container'>
+        {games.map((game, index) => {
+          return (
+            <div key={index}>
+              <GameCard
+                game={game}
+                logos={logos}
+              />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
