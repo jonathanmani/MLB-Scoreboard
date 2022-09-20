@@ -2,15 +2,6 @@ const passport = require('passport');
 const validator = require('validator');
 const User = require('../models/User');
 
-exports.getLogin = (req, res) => {
-  if (req.user) {
-    return res.redirect('/todos');
-  }
-  res.render('login', {
-    title: 'Login',
-  });
-};
-
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -56,15 +47,6 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.getSignup = (req, res) => {
-  if (req.user) {
-    return res.redirect('/todos');
-  }
-  res.render('signup', {
-    title: 'Create Account',
-  });
-};
-
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -85,14 +67,15 @@ exports.postSignup = (req, res, next) => {
   });
 
   const user = new User({
-    userName: req.body.userName,
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });
 
   User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
+    { $or: [{ email: req.body.email }, { username: req.body.username }] },
     (err, existingUser) => {
+      console.log(existingUser);
       if (err) {
         return next(err);
       }
@@ -110,7 +93,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect('/todos');
+          return res.status(201).end();
         });
       });
     }
